@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="BurçResim\Akrep.png" />
+    <None Remove="BurçResim\Aslan.png" />
+    <None Remove="BurçResim\Balık.png" />
+    <None Remove="BurçResim\Başak.png" />
+    <None Remove="BurçResim\Boğa.png" />
+    <None Remove="BurçResim\Kova.png" />
+    <None Remove="BurçResim\Koç.png" />
+    <None Remove="BurçResim\Oğlak.png" />
+    <None Remove="BurçResim\Terazi.png" />
+    <None Remove="BurçResim\Yay.png" />
+    <None Remove="BurçResim\Yengeç.png" />
+    <None Remove="BurçResim\İkizler.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="BurçResim\Aslan.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="BurçResim\Akrep.png" />
+    <EmbeddedResource Include="BurçResim\Balık.png" />
+    <EmbeddedResource Include="BurçResim\Başak.png" />
+    <EmbeddedResource Include="BurçResim\Boğa.png" />
+    <EmbeddedResource Include="BurçResim\Kova.png" />
+    <EmbeddedResource Include="BurçResim\Koç.png" />
+    <EmbeddedResource Include="BurçResim\Oğlak.png" />
+    <EmbeddedResource Include="BurçResim\Terazi.png" />
+    <EmbeddedResource Include="BurçResim\Yay.png" />
+    <EmbeddedResource Include="BurçResim\Yengeç.png" />
+    <EmbeddedResource Include="BurçResim\İkizler.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+</Project>
