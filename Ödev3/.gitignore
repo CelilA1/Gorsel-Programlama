@@ -13,8 +13,5 @@ bin/
 obj/
 *.user
 *.suo
-*.log7
-*.userosscache
-*.sln.docstates
     }
 }
