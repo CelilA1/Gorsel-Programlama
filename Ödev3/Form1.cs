@@ -206,7 +206,7 @@ namespace Ödev3
             textBox_Kilo.Text = "";
             textBox_Soyad.Text = "";
             pictureBox_BurcResim.Image = null;
-            dataGridView1.
+            
         }
     }
 }
