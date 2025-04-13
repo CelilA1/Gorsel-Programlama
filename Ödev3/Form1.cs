@@ -231,7 +231,13 @@ public class AppDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlite("Data Source=C:\\sqlite\\Burc.db");
+        var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "Burc.db");
+        optionsBuilder.UseSqlite($"Data Source={path}");
+    }
+
+    public AppDbContext()
+    {
+        Database.EnsureCreated();
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

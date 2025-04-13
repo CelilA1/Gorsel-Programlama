@@ -21,6 +21,13 @@
     <None Remove="BurçResim\Yay.png" />
     <None Remove="BurçResim\Yengeç.png" />
     <None Remove="BurçResim\İkizler.png" />
+    <None Remove="Data\Burc.db" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Data\Burc.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
