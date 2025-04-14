@@ -9,12 +9,12 @@ namespace Ödev3
 {
     public partial class Form1 : Form
     {
-        private Image LoadImageFromResources(string imageName)
+        private Image LoadImageFromResources(string imageName) // Gömülü kaynaklardan resimlere erişimi sağlar.
         {
             var assembly = Assembly.GetExecutingAssembly();
             var resourceName = $"Ödev3.BurçResim.{imageName}";
 
-            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+            using (Stream stream = assembly.GetManifestResourceStream(resourceName)) // Gömülü olarak işaretlenmiş dsoyaları okur.
             {
                 return Image.FromStream(stream);
             }
@@ -28,9 +28,10 @@ namespace Ödev3
         string Ad, Soyad, Burc, BurcYorumu, VKI_Yorum, DogumTarihi, AyStr, BurcResimIsmi;
         int Boy, Kilo, Gun, Ay, Yil;
         double VKI, Boycm;
-
-        private void button_Kaydet_Click(object sender, EventArgs e)
+        // Kodda kullanılacak değişkenler tanımlandı.
+        private void button_Kaydet_Click(object sender, EventArgs e) // Text kısımlarına girilen değerler göre veri tabanına kayıt gerçekleştirildi.
         {
+            // Kodun içeriğinde kullanılacak değerler hesaplandı.
             Ad = textBox_Ad.Text;
             Soyad = textBox_Soyad.Text;
             DogumTarihi = textBox_DogumTarihi.Text;
@@ -42,7 +43,7 @@ namespace Ödev3
             Boycm = Boy / 100;
             VKI = Kilo / (Boycm * Boycm);
 
-            switch (Ay)
+            switch (Ay) // Her ay için ekrana gösterilecek resim, burç yorumu, burç ve ay adı belirlendi.
             {
                 case 01:
                     BurcResimIsmi = "Oğlak.png";
@@ -129,6 +130,7 @@ namespace Ödev3
                     break;
             }
 
+            //VKI değerleri için değer aralıkları belirlendi. Buna göre dönderilecek ifadeler yazıldı.
             if (VKI < 18.5)
             {
                 VKI_Yorum = "Zayıf: Vücut kitle indeksiniz düşük, beslenme düzeninizi gözden geçirin.";
@@ -162,7 +164,7 @@ namespace Ödev3
                 VKI_Yorum = "Morbid Obez (Seviye 3): Hayatınızı tehdit edebilir, acilen bir uzman desteği almanız gerekmektedir.";
             }
 
-            using (var context = new AppDbContext())
+            using (var context = new AppDbContext()) //Entity Framework ile Kullanici oluşturuldu. Sqlite veritabanına kaydedildi.
             {
                 var kullanici = new Kullanici
                 {
@@ -180,11 +182,11 @@ namespace Ödev3
                 context.SaveChanges();
             }
 
-            pictureBox_BurcResim.Image = LoadImageFromResources(BurcResimIsmi);
+            pictureBox_BurcResim.Image = LoadImageFromResources(BurcResimIsmi); // Resim kaynağı alınarak resim pictureBox içerisinde gösterildi.
 
         }
 
-        private void button_Goster_Click(object sender, EventArgs e)
+        private void button_Goster_Click(object sender, EventArgs e) // Veri tabanındaki tüm değerler dataGridView içerisinde gçsterilir.
         {
             using (var context = new AppDbContext())
             {
@@ -198,7 +200,7 @@ namespace Ödev3
 
         }
 
-        private void button_Temizle_Click(object sender, EventArgs e)
+        private void button_Temizle_Click(object sender, EventArgs e) // Text değerleri içerisindeki ve pictureBox içerisindeki ifadeler silindi.
         {
             textBox_Ad.Text = "";
             textBox_Boy.Text = "";
@@ -211,7 +213,7 @@ namespace Ödev3
     }
 }
 
-public class Kullanici
+public class Kullanici // Entity Framework için sınıflar oluşturuldu. Id otomatik olarak First Key oldu.
 {
     public int Id { get; set; }
     public string Ad { get; set; }
@@ -225,23 +227,25 @@ public class Kullanici
     public string VKI_Yorum { get; set; }
 }
 
-public class AppDbContext : DbContext
+public class AppDbContext : DbContext // Entity Framework ile veri tabanı bağlantısı kuruldu.
 {
-    public DbSet<Kullanici> Kullanici { get; set; }
+    public DbSet<Kullanici> Kullanici { get; set; } // Kullanıcı tablosu oluşturmayı sağlar.
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "Burc.db");
-        optionsBuilder.UseSqlite($"Data Source={path}");
+        var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data", "Burc.db"); // Veri tabanı dosyasındaki burç ifadesinin dosya yolunu alır.
+        optionsBuilder.UseSqlite($"Data Source={path}"); // Veri tabanı yolu kullanılarak bağlantı kuruldu.
     }
 
     public AppDbContext()
     {
-        Database.EnsureCreated();
+        Database.EnsureCreated(); // Veri tabanı dosyası yoksa otomatik oluşturur.
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
     }
+    // Veri tabanındaki değerlerle ilgili özel olarak yapılmak istenenler burada yapılabilir.
+    // Boş bırakılamama tablodaki değerlerin uzunluğu vs.
 }
